@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .li {
+        text-decoration: none;
+        list-style-type: none;
+        border-bottom: 1px solid #000000;
+
+    }
+
+    .ul:hover {
+        opacity: 0.5;
+    }
+
+    .ul:last-child {
+        border-bottom: none;
+    }
+</style>
+<body>
+    <div class="container">
+        <form action="" id="formSubmit">
+            <textarea name="notas" id="notas"></textarea>
+            <button type="submit" class="btn" id="btn">Adicionar nota</button>
+        </form>
+        <hr>
+    </div>
+    <ul class="listNotas" id="listNotas"></ul>
+    <script>
+        const API_URL = 'http://localhost:8080/notes'
+        const form = document.getElementById('formSubmit')
+        const btn = document.getElementById('btn');
+        const txt = document.getElementById('notas')
+        const listNotas = document.getElementById('listNotas')
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const nota = txt.value.trim()
+            const res = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nota: nota
+                    })
+                })
+                
+                const data = await res.json()
+                if(data.nota == '') {return;}
+                const listItem = document.createElement('li')
+                listNotas.appendChild(listItem);
+
+                listItem.innerHTML = data.nota
+                txt.value = ''
+            }  
+
+        )
+    </script> 
+</body>
+</html>

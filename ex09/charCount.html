@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Ex. 8 - Contador de Caracteres</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; margin: 24px; background: #f7f7f7; color: #222; }
+    .box { max-width: 560px; margin: 0 auto; background: #fff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 16px; }
+    h1 { margin: 0 0 12px; font-size: 22px; }
+    textarea { width: 100%; height: 120px; padding: 10px 12px; border: 1px solid #d0d0d0; border-radius: 8px; font-size: 14px; outline: none; resize: vertical; }
+    textarea:focus { border-color: #0d6efd; box-shadow: 0 0 0 2px rgba(13,110,253,.15); }
+    .status { margin-top: 8px; font-size: 14px; color: #555; }
+    .limite { color: #c0392b; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Contador de 140 caracteres</h1>
+
+    <textarea id="msg" placeholder="Escreva sua mensagem..."></textarea>
+    <div id="restante" class="status">Restantes: <span id="num">140</span></div>
+  </div>
+
+  <script>
+    const txt = document.getElementById('msg');
+    
+    txt.addEventListener('input', (e) =>{
+        let charCount =  txt.value.length
+        let restante = 140 - charCount
+        const numEl = document.getElementById('num')
+        numEl.innerText = restante
+
+    })
+
+  </script>
+</body>
+</html>

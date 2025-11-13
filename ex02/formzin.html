@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .inputDiv {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+    textarea {
+        resize: none;
+        height: 100px;
+        width: 300px;
+    }
+    .actions {
+        margin-top: 20px;
+    }
+</style>
+<body>
+    <form action="/notes" method="POST">
+        <h1>
+            Enviar Nota Automatica
+        </h1>
+        <div class="inputDiv">
+            <label for="nota">Nota:</label>
+            <textarea name="nota" id="noteArea" maxlength="140" autofocus placeholder="Digie sua nota aqui"></textarea>
+        </div>
+        <div class="inputDiv">
+            <label for="email">Email (opcional):</label>
+            <input type="text" name="email" id="email" placeholder="Digite o email">
+        </div>
+        <div class="termoDiv">
+            <input type="checkbox" name="termo" id="termo" required>
+            <label for="termo">Concordo com os termos de uso</label>
+        </div>
+
+        <div class="actions">
+            <button type="submit">Enviar Nota</button>
+            <button type="reset">Limpar</button>
+        </div>
+
+        <p>Limite de 140 caracteres</p>
+    </form>
+</body>
+</html>

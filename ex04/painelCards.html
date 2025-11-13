@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Ex. 4 - Painel de Cards (float)</title>
+  <style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    a {
+        text-decoration: none;
+    }
+    .container {
+        height: 100vh;
+        background-color: gray;
+        /* display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; */
+    }
+    .card {
+          background-color: white;
+          border-radius: 15px;
+          width: 430px;
+          float: left;
+          margin: 10px;
+          box-shadow: 1px 4px 3px #000000;
+
+          
+    }
+    .card img {
+        width: 100%;
+    }
+
+    .grid {
+        width: 900px;
+        margin: 0 auto;
+    }
+    .card-body {
+        padding: 15px;
+    }
+    .card-title {
+        font-weight: bold;
+    }
+    .btn {
+        background-color: blue;
+        color: white;
+        padding: 8px;
+        border-radius: 8px;
+        
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Painel de Cards</h1>
+    <div class="grid">
+      <div class="card">
+        <img src="https://picsum.photos/seed/a/640/360" alt="Imagem do card A">
+        <div class="card-body">
+          <div class="card-title">Título do Card A</div>
+          <p class="card-desc">Descrição breve do card A.</p>
+          <a class="btn" href="#">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://picsum.photos/seed/b/640/360" alt="Imagem do card B">
+        <div class="card-body">
+          <div class="card-title">Título do Card B</div>
+          <p class="card-desc">Descrição breve do card B.</p>
+          <a class="btn" href="#">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://picsum.photos/seed/c/640/360" alt="Imagem do card C">
+        <div class="card-body">
+          <div class="card-title">Título do Card C</div>
+          <p class="card-desc">Descrição breve do card C.</p>
+          <a class="btn" href="#">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://picsum.photos/seed/d/640/360" alt="Imagem do card D">
+        <div class="card-body">
+          <div class="card-title">Título do Card D</div>
+          <p class="card-desc">Descrição breve do card D.</p>
+          <a class="btn" href="#">Ver mais</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Ex. 9 - Enviar Feedback</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; margin: 24px; background: #f7f7f7; color: #222; }
+    .box { max-width: 560px; margin: 0 auto; background: #fff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 16px; }
+    h1 { margin: 0 0 12px; font-size: 22px; }
+    textarea { width: 100%; height: 120px; padding: 10px 12px; border: 1px solid #d0d0d0; border-radius: 8px; font-size: 14px; outline: none; resize: vertical; }
+    textarea:focus { border-color: #0d6efd; box-shadow: 0 0 0 2px rgba(13,110,253,.15); }
+    .row { margin-top: 10px; display: flex; gap: 8px; align-items: center; }
+    button { padding: 10px 16px; border: none; border-radius: 8px; background: #0d6efd; color: #fff; font-size: 14px; cursor: pointer; }
+    button:hover { background: #0b5ed7; }
+    button:disabled { opacity: .6; cursor: not-allowed; }
+    #status { font-size: 14px; }
+    .ok { color: #1e7e34; }
+    .erro { color: #c0392b; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Enviar Feedback</h1>
+
+    <form id="form">
+      <textarea id="texto" placeholder="Seu feedback..." required></textarea>
+      <div class="row">
+        <button id="enviar" type="submit">Enviar</button>
+        <span id="status"></span>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    var form = document.getElementById('form');
+    var texto = document.getElementById('texto');
+    var statusEl = document.getElementById('status');
+    var btn = document.getElementById('enviar');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var msg = texto.value.trim();
+      if (!msg) return;
+
+      statusEl.textContent = 'Enviando...';
+      statusEl.className = '';
+      btn.disabled = true;
+
+      fetch('http://localhost:8080/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ texto: msg, criadoEm: new Date().toISOString() })
+      })
+      .then(async function (resp) {
+        if (resp.ok) {
+          const data = await resp.json()
+          // console.log(data)
+          statusEl.textContent = 'Feedback enviado com sucesso .' + data.texto + " " + 'Foi criado em ' + data.criadoEm;
+          statusEl.className = 'ok';
+          texto.value = '';
+        } else {
+          statusEl.textContent = 'Erro ao enviar. Código: ' + resp.status;
+          statusEl.className = 'erro';
+        }
+      })
+      .catch(function(err) {
+        statusEl.textContent = 'Falha de conexão: ' + err.message;
+        statusEl.className = 'erro';
+      })
+      .finally(function() {
+        btn.disabled = false;
+      });
+    });
+    </script>
+</body>
+</html>
